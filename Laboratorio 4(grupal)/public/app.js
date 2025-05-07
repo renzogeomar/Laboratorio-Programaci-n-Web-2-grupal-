@@ -1,3 +1,17 @@
+function fetchFiles() {
+    fetch('/api/files')
+      .then(res => res.json())
+      .then(files => {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+        files.forEach(file => {
+          const li = document.createElement('li');
+          li.textContent = file;
+          li.onclick = () => loadFile(file);
+          list.appendChild(li);
+        });
+      });
+  }
 function loadFile(name) {
     fetch(`/api/file/${name}`)
       .then(res => res.json())
@@ -14,5 +28,12 @@ function saveFile() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, content })
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.success) {
+        alert('Archivo guardado');
+        fetchFiles();
+      }
     });
   }
