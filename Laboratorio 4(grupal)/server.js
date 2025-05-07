@@ -18,3 +18,12 @@ app.get('/api/files', (req, res) => {
       res.json(mdFiles);
     });
   });
+
+// Obtener contenido de un archivo Markdown
+app.get('/api/file/:name', (req, res) => {
+    const filePath = path.join(MARKDOWN_DIR, req.params.name);
+    fs.readFile(filePath, 'utf8', (err, content) => {
+      if (err) return res.status(404).json({ error: 'Archivo no encontrado' });
+      res.json({ content });
+    });
+  });
