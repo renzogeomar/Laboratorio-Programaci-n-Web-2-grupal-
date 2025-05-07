@@ -27,3 +27,20 @@ app.get('/api/file/:name', (req, res) => {
       res.json({ content });
     });
   });
+
+  // Crear archivo nuevo
+app.post('/api/file', (req, res) => {
+    const { name, content } = req.body;
+    if (!name || !content) return res.status(400).json({ error: 'Faltan datos' });
+  
+    const safeName = name.endsWith('.md') ? name : name + '.md';
+    const filePath = path.join(MARKDOWN_DIR, safeName);
+    fs.writeFile(filePath, content, err => {
+      if (err) return res.status(500).json({ error: 'Error al guardar archivo' });
+      res.json({ success: true });
+    });
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
