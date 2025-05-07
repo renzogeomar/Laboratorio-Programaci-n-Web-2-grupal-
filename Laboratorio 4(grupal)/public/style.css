@@ -27,3 +27,37 @@ ul#file-list li {
     border-bottom: 1px solid #ddd;
     cursor: pointer;
 }
+ul#file-list li:hover {
+    background-color: #e0e0e0;
+}
+
+#file-content {
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #fafafa;
+    min-height: 100px;
+    border-radius: 6px;
+}
+
+input#new-name, textarea#new-content {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
