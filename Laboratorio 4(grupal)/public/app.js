@@ -6,7 +6,7 @@ function loadFile(name) {
         document.getElementById('file-content').innerHTML = html;
       });
   }
-function saveFile() {
+  function saveFile() {
     const name = document.getElementById('new-name').value;
     const content = document.getElementById('new-content').value;
   
@@ -14,5 +14,12 @@ function saveFile() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, content })
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.success) {
+        alert('Archivo guardado');
+        fetchFiles();
+      }
     });
   }
