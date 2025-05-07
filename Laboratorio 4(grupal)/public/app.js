@@ -1,3 +1,17 @@
+function fetchFiles() {
+    fetch('/api/files')
+      .then(res => res.json())
+      .then(files => {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+        files.forEach(file => {
+          const li = document.createElement('li');
+          li.textContent = file;
+          li.onclick = () => loadFile(file);
+          list.appendChild(li);
+        });
+      });
+  }
 function loadFile(name) {
     fetch(`/api/file/${name}`)
       .then(res => res.json())
@@ -6,7 +20,7 @@ function loadFile(name) {
         document.getElementById('file-content').innerHTML = html;
       });
   }
-  function saveFile() {
+function saveFile() {
     const name = document.getElementById('new-name').value;
     const content = document.getElementById('new-content').value;
   
